@@ -2,33 +2,44 @@ import { IHttpRequest, IHttpResponse } from '../protocols/http.interface'
 import { IController } from '../protocols/controller.interface'
 import { IEmailValidator } from '../protocols/emailValidator.interface'
 
-import { badRequest } from '../helpers/httpHelper'
-import { MissingParamsError } from '../errors/MissingParams.error';
-import { InvalidParamsError } from '../errors/InvalidParams.error';
+import { badRequest, serverError, ok } from '../helpers/httpHelper'
+import { MissingParamsError, InvalidParamsError } from '../errors/index';
+import { IAddAccount } from '../../domain/useCases/AddAccount.usecase';
 
 export class SignUpController implements IController {
-  constructor(private readonly emailValidator: IEmailValidator) {
+  constructor(
+    private readonly emailValidator: IEmailValidator,
+    private readonly addAccount: IAddAccount
+  ) {
 
   }
 
-  handle(httpRequest: IHttpRequest): IHttpResponse {
-    const requiredFields = ['name', 'email', 'password', 'passwordConfirmation']
-
-    for (const field of requiredFields) {
-      if (!httpRequest.body[field]) {
-        return badRequest(new MissingParamsError(field));
+  async handle(httpRequest: IHttpRequest): Promise<IHttpResponse> {
+    try {
+      const requiredFields = ['name', 'email', 'password', 'passwordConfirmation']
+      const { name, email, password, passwordConfirmation } = httpRequest.body
+    
+      for (const field of requiredFields) {
+        if (!httpRequest.body[field]) {
+          return badRequest(new MissingParamsError(field));
+        }
       }
-    }
 
-    const isEmailValid = this.emailValidator.isValid(httpRequest.body.email)
+      if (password !== passwordConfirmation) {
+        return badRequest(new InvalidParamsError('passwordConfirmation'))
+      }
+    
+      const isEmailValid = this.emailValidator.isValid(email)
+    
+      if (!isEmailValid) {
+        return badRequest(new InvalidParamsError('email'))
+      }
 
-    if (!isEmailValid) {
-      return badRequest(new InvalidParamsError('email'))
-    }
+      const account = await this.addAccount.add({ name, email, password })
 
-    return {
-      statusCode: 400,
-      body: new Error("")
+      return ok(account)
+    } catch(error) {
+      return serverError()
     }
   }
 }
