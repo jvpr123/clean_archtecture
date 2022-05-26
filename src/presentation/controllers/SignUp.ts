@@ -38,8 +38,8 @@ export class SignUpController implements IController {
       const account = await this.addAccount.add({ name, email, password })
 
       return ok(account)
-    } catch(error) {
-      return serverError()
+    } catch(error: any) {
+      return serverError(error)
     }
   }
 }
