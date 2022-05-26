@@ -8,6 +8,7 @@ import { BcryptAdapter } from "../../infra/criptography/Bcrypt.adapter";
 import { EmailValidatorAdapter } from "../../utils/EmailValidator.adapter";
 
 import { ControllerWithLoggerDecorator } from "../decorators/Logger.decorator";
+import { LoggerRepository } from "../../infra/database/mongoDB/Logger/LoggerRepository";
 
 export const makeSignUpController = (): IController => {
     const emailValidator = new EmailValidatorAdapter()
@@ -15,8 +16,9 @@ export const makeSignUpController = (): IController => {
  
     const accountMongoRepository = new AccountMongoRepository()
     const addAccountRepository = new DbAddAccount(encrypter, accountMongoRepository)
+    const loggerRepository = new LoggerRepository()
     
     const signUpController = new SignUpController(emailValidator, addAccountRepository)
 
-    return new ControllerWithLoggerDecorator(signUpController)
+    return new ControllerWithLoggerDecorator(signUpController, loggerRepository)
 }
