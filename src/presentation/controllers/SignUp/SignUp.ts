@@ -1,11 +1,9 @@
 import { IHttpRequest, IHttpResponse } from '../../protocols/http.interface'
 import { IController } from '../../protocols/controller.interface'
-import { IEmailValidator } from '../../protocols/emailValidator.interface'
 
-import { badRequest, serverError, ok } from '../../helpers/httpHelper'
-import { MissingParamsError, InvalidParamsError } from '../../errors/index';
+import { badRequest, serverError, ok } from '../../helpers/http/httpHelper'
 import { IAddAccount } from '../../../domain/useCases/AddAccount.usecase';
-import { IValidation } from '../../helpers/validators/validation.interface';
+import { IValidation } from '../../protocols/validation.interface';
 
 export class SignUpController implements IController {
   constructor(

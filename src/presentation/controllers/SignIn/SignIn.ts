@@ -1,33 +1,25 @@
 import { IController } from "../../protocols/controller.interface";
 import { IHttpRequest, IHttpResponse } from "../../protocols/http.interface";
-import { IEmailValidator } from "../../protocols/emailValidator.interface";
 import { IAuthentication } from "../../../domain/useCases/Authentication.usecase";
 
-import { badRequest, ok, serverError, unauthorized } from "../../helpers/httpHelper";
-import { InvalidParamsError, MissingParamsError } from "../../errors";
+import { badRequest, ok, serverError, unauthorized } from "../../helpers/http/httpHelper";
+import { IValidation } from "../../protocols/validation.interface";
 
 export class SignInController implements IController {
     constructor(
-        private readonly emailValidator: IEmailValidator,
-        private readonly authenticator: IAuthentication,
+        private readonly validation: IValidation,
+        private readonly authentication: IAuthentication,
     ) {}
 
     async handle(httpRequest: IHttpRequest): Promise<IHttpResponse> {
         try {
-            const requiredFields = ['email', 'password']
-            const { email, password } = httpRequest.body
-            
-            for (const field of requiredFields) {
-                if (!httpRequest.body[field]) {
-                    return badRequest(new MissingParamsError(field))
-                }
-            }
-    
-            if (!this.emailValidator.isValid(email)) {
-                return badRequest(new InvalidParamsError('email'))
-            }
+            const error = this.validation.validate(httpRequest.body)
 
-            const token = await this.authenticator.auth(email, password)
+            if (error) {
+                return badRequest(error)
+            }
+            
+            const token = await this.authentication.auth(httpRequest.body)
 
             if (!token) {
                 return unauthorized()

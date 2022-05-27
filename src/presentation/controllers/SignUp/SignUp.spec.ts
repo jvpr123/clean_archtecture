@@ -3,9 +3,9 @@ import { IAddAccount, IAddAccountModel } from "../../../domain/useCases/AddAccou
 import { AccountModel } from "../../../domain/models/Account.model";
 
 import { IHttpRequest } from "../../protocols/http.interface";
-import { IValidation } from "../../helpers/validators/validation.interface";
+import { IValidation } from "../../protocols/validation.interface";
 
-import { badRequest, ok, serverError } from "../../helpers/httpHelper";
+import { badRequest, ok, serverError } from "../../helpers/http/httpHelper";
 import { MissingParamsError, ServerError } from '../../errors/index'
 
 interface SutTypes {

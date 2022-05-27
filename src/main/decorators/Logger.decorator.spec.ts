@@ -1,4 +1,4 @@
-import { serverError } from "../../presentation/helpers/httpHelper"
+import { serverError } from "../../presentation/helpers/http/httpHelper"
 import { IController } from "../../presentation/protocols/controller.interface"
 import { IHttpRequest, IHttpResponse } from "../../presentation/protocols/http.interface"
 import { ILoggerRepository } from '../../data/protocols/loggerRepository.interface'
