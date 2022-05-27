@@ -5,36 +5,25 @@ import { IEmailValidator } from '../../protocols/emailValidator.interface'
 import { badRequest, serverError, ok } from '../../helpers/httpHelper'
 import { MissingParamsError, InvalidParamsError } from '../../errors/index';
 import { IAddAccount } from '../../../domain/useCases/AddAccount.usecase';
+import { IValidation } from '../../helpers/validators/validation.interface';
 
 export class SignUpController implements IController {
   constructor(
-    private readonly emailValidator: IEmailValidator,
-    private readonly addAccount: IAddAccount
+    private readonly addAccount: IAddAccount,
+    private readonly validation: IValidation,
   ) {
 
   }
 
   async handle(httpRequest: IHttpRequest): Promise<IHttpResponse> {
     try {
-      const requiredFields = ['name', 'email', 'password', 'passwordConfirmation']
-      const { name, email, password, passwordConfirmation } = httpRequest.body
-    
-      for (const field of requiredFields) {
-        if (!httpRequest.body[field]) {
-          return badRequest(new MissingParamsError(field));
-        }
-      }
+      const error = this.validation.validate(httpRequest.body)
 
-      if (password !== passwordConfirmation) {
-        return badRequest(new InvalidParamsError('passwordConfirmation'))
+      if (error) {
+        return badRequest(error)
       }
-    
-      const isEmailValid = this.emailValidator.isValid(email)
-    
-      if (!isEmailValid) {
-        return badRequest(new InvalidParamsError('email'))
-      }
-
+      
+      const { name, email, password } = httpRequest.body
       const account = await this.addAccount.add({ name, email, password })
 
       return ok(account)
