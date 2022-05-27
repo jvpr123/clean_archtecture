@@ -1,10 +1,10 @@
-import { IHttpRequest, IHttpResponse } from '../protocols/http.interface'
-import { IController } from '../protocols/controller.interface'
-import { IEmailValidator } from '../protocols/emailValidator.interface'
+import { IHttpRequest, IHttpResponse } from '../../protocols/http.interface'
+import { IController } from '../../protocols/controller.interface'
+import { IEmailValidator } from '../../protocols/emailValidator.interface'
 
-import { badRequest, serverError, ok } from '../helpers/httpHelper'
-import { MissingParamsError, InvalidParamsError } from '../errors/index';
-import { IAddAccount } from '../../domain/useCases/AddAccount.usecase';
+import { badRequest, serverError, ok } from '../../helpers/httpHelper'
+import { MissingParamsError, InvalidParamsError } from '../../errors/index';
+import { IAddAccount } from '../../../domain/useCases/AddAccount.usecase';
 
 export class SignUpController implements IController {
   constructor(

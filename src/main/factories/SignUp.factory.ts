@@ -2,7 +2,7 @@ import { DbAddAccount } from "../../data/useCases/addAccount/DbAddAccount";
 import { AccountMongoRepository } from "../../infra/database/mongoDB/Account/AccountRepository";
 
 import { IController } from "../../presentation/protocols/controller.interface";
-import { SignUpController } from "../../presentation/controllers/SignUp";
+import { SignUpController } from "../../presentation/controllers/SignUp/SignUp";
 
 import { BcryptAdapter } from "../../infra/criptography/Bcrypt.adapter";
 import { EmailValidatorAdapter } from "../../utils/EmailValidator.adapter";
