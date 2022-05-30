@@ -1,8 +1,8 @@
 import { DbAddAccount } from "./DbAddAccount"
-import { IEncrypter } from '../../protocols/encrypter.interface'
+import { IEncrypter } from '../../protocols/criptography/encrypter.interface'
 import { IAddAccountModel } from "../../../domain/useCases/AddAccount.usecase"
 import { AccountModel } from "../../../domain/models/Account.model"
-import { IAddAccountRepository } from "../../protocols/addAccountRepository.interface"
+import { IAddAccountRepository } from "../../protocols/database/addAccountRepository.interface"
 
 interface SutTypes {
     sut: DbAddAccount,

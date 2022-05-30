@@ -1,4 +1,4 @@
-import { IAddAccountRepository } from "../../../../data/protocols/addAccountRepository.interface";
+import { IAddAccountRepository } from "../../../../data/protocols/database/addAccountRepository.interface";
 import { AccountModel } from "../../../../domain/models/Account.model";
 import { IAddAccountModel } from "../../../../domain/useCases/AddAccount.usecase";
 import { map } from "../helpers/CollectionMapper";

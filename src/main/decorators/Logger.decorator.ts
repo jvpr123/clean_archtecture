@@ -1,4 +1,4 @@
-import { ILoggerRepository } from "../../data/protocols/loggerRepository.interface"
+import { ILoggerRepository } from "../../data/protocols/database/loggerRepository.interface"
 import { IController } from "../../presentation/protocols/controller.interface"
 import { IHttpRequest, IHttpResponse } from "../../presentation/protocols/http.interface"
 

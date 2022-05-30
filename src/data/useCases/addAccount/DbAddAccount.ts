@@ -1,7 +1,7 @@
 import { AccountModel } from '../../../domain/models/Account.model';
 import { IAddAccount, IAddAccountModel } from '../../../domain/useCases/AddAccount.usecase'
-import { IAddAccountRepository } from '../../protocols/addAccountRepository.interface';
-import { IEncrypter } from '../../protocols/encrypter.interface';
+import { IAddAccountRepository } from '../../protocols/database/addAccountRepository.interface';
+import { IEncrypter } from '../../protocols/criptography/encrypter.interface';
 
 export class DbAddAccount implements IAddAccount {
     constructor (
