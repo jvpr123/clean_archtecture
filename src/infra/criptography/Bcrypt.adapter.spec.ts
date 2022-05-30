@@ -26,14 +26,14 @@ describe("Bcrypt Adapter", () => {
   test("Should call bcrypt library with correct values", async () => {
     const { sut, salt } = makeSUT();
     const bcryptSpy = jest.spyOn(bcrypt, "hash");
-    await sut.encrypt("valid_password");
+    await sut.hash("valid_password");
 
     expect(bcryptSpy).toHaveBeenCalledWith("valid_password", salt);
   });
 
   test("Should return hashed password on success", async () => {
     const { sut } = makeSUT();
-    const hashedPassword = await sut.encrypt("valid_password");
+    const hashedPassword = await sut.hash("valid_password");
 
     expect(hashedPassword).toBe("hashed_password");
   });

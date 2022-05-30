@@ -1,12 +1,12 @@
 import { DbAddAccount } from "./DbAddAccount"
-import { IEncrypter } from '../../protocols/criptography/encrypter.interface'
+import { IHasher } from '../../protocols/criptography/hasher.interface'
 import { IAddAccountModel } from "../../../domain/useCases/AddAccount.usecase"
 import { AccountModel } from "../../../domain/models/Account.model"
 import { IAddAccountRepository } from "../../protocols/database/addAccountRepository.interface"
 
 interface SutTypes {
     sut: DbAddAccount,
-    encrypterStub: IEncrypter,
+    encrypterStub: IHasher,
     addAccountRepositoryStub: IAddAccountRepository,
 }
 
@@ -33,9 +33,9 @@ const makeAddAccountRepository = (): IAddAccountRepository => {
     return new AddAccountRepositoryStub()
 }
 
-const makeEncrypter = (): IEncrypter => {
-    class EncrypterStub implements IEncrypter {
-        async encrypt(value: string): Promise<string> {
+const makeEncrypter = (): IHasher => {
+    class EncrypterStub implements IHasher {
+        async hash(value: string): Promise<string> {
             return new Promise(resolve => resolve('hashed_password'))
         }
     }
@@ -58,7 +58,7 @@ const makeSUT = (): SutTypes => {
 describe('DbAddAccount UseCase', () => {
     test('Should call encrypter with correct password', async () => {
         const { sut, encrypterStub } = makeSUT()
-        const encrypterSpy = jest.spyOn(encrypterStub, 'encrypt')
+        const encrypterSpy = jest.spyOn(encrypterStub, 'hash')
    
         await sut.add(makeFakeAccountData())
         expect(encrypterSpy).toHaveBeenCalledWith('valid_password')
@@ -67,7 +67,7 @@ describe('DbAddAccount UseCase', () => {
     test('Should throw an error if encrypter throws an exception', async () => {
         const { sut, encrypterStub } = makeSUT()
 
-        jest.spyOn(encrypterStub, 'encrypt').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+        jest.spyOn(encrypterStub, 'hash').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
 
         const addAccountPromise = sut.add(makeFakeAccountData())
         expect(addAccountPromise).rejects.toThrow()

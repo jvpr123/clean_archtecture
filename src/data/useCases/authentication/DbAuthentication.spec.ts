@@ -2,14 +2,14 @@ import { AccountModel } from "../../../domain/models/Account.model"
 import { DbAuthentication } from "./DbAuthentication"
 
 import { IAuthenticationModel } from "../../../domain/useCases/Authentication.usecase"
-import { ITokenGenerator, IHashComparer } from "../../protocols/criptography/criptographyProtocols"
+import { IEncrypter, IHashComparer } from "../../protocols/criptography/criptographyProtocols"
 import { ILoadAccountByEmailRepository, IUpdateAccessTokenRepository } from "../../protocols/database/dbRepositoriesProtocols"
 
 interface SutTypes {
     sut: DbAuthentication,
     loadAccountByEmailRepositoryStub: ILoadAccountByEmailRepository,
     hashComparerStub: IHashComparer,
-    tokenGeneratorStub: ITokenGenerator,
+    tokenGeneratorStub: IEncrypter,
     updateAccessTokenRepositoryStub: IUpdateAccessTokenRepository,
 }
 
@@ -35,9 +35,9 @@ const makeHashComparer = (): IHashComparer => {
     return new HashComparerStub()
 }
 
-const makeTokenGenerator = (): ITokenGenerator => {
-    class TokenGeneratorStub implements ITokenGenerator {
-        async generate (id: string): Promise<string> {
+const makeTokenGenerator = (): IEncrypter => {
+    class TokenGeneratorStub implements IEncrypter {
+        async encrypt (id: string): Promise<string> {
             return new Promise((resolve) => resolve('access_token'))
         }
     }
@@ -157,7 +157,7 @@ describe('DbAuthentication UseCase', () => {
 
     test('Should call TokenGenerator with correct id', async () => {
         const { sut, tokenGeneratorStub } = makeSUT()
-        const compareSpy = jest.spyOn(tokenGeneratorStub, 'generate')
+        const compareSpy = jest.spyOn(tokenGeneratorStub, 'encrypt')
         
         await sut.auth(makeFakeAuthentication())
 
@@ -168,7 +168,7 @@ describe('DbAuthentication UseCase', () => {
         const { sut, tokenGeneratorStub } = makeSUT()
         
         jest
-            .spyOn(tokenGeneratorStub, 'generate')
+            .spyOn(tokenGeneratorStub, 'encrypt')
             .mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
 
         const promise = sut.auth(makeFakeAuthentication())
