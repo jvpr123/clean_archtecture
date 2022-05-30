@@ -27,6 +27,7 @@ export class SignInController implements IController {
     
             return ok({ token })
         } catch (error: any) {
+            console.log(error)
             return serverError(error)
         }
     }

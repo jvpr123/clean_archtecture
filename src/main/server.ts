@@ -10,4 +10,3 @@ MongoHelper.connect(env.mongoUrl)
         })
     })
     .catch(console.error)
-
