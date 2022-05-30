@@ -1,10 +1,10 @@
 import { DbAddAccount } from "../../../data/useCases/addAccount/DbAddAccount";
 import { AccountMongoRepository } from "../../../infra/database/mongoDB/Account/AccountRepository";
 
-import { IController } from "../../../presentation/protocols/controller.interface";
+import { IController } from "../../../presentation/protocols/Controller.interface";
 import { SignUpController } from "../../../presentation/controllers/SignUp/SignUp";
 
-import { BcryptAdapter } from "../../../infra/criptography/Bcrypt.adapter";
+import { BcryptAdapter } from "../../../infra/criptography/bcrypt/Bcrypt.adapter";
 import { EmailValidatorAdapter } from "../../../utils/EmailValidator.adapter";
 
 import { ControllerWithLoggerDecorator } from "../../decorators/Logger.decorator";

@@ -1,6 +1,6 @@
-import { ILoggerRepository } from "../../data/protocols/database/loggerRepository.interface"
-import { IController } from "../../presentation/protocols/controller.interface"
-import { IHttpRequest, IHttpResponse } from "../../presentation/protocols/http.interface"
+import { ILoggerRepository } from "../../data/protocols/database/LoggerRepository.interface"
+import { IController } from "../../presentation/protocols/Controller.interface"
+import { IHttpRequest, IHttpResponse } from "../../presentation/protocols/Http.interface"
 
 export class ControllerWithLoggerDecorator implements IController {
     constructor(

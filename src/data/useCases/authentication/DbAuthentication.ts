@@ -1,6 +1,6 @@
 import { IAuthentication, IAuthenticationModel } from "../../../domain/useCases/Authentication.usecase";
-import { IHashComparer, IEncrypter } from "../../protocols/criptography/criptographyProtocols";
-import { ILoadAccountByEmailRepository, IUpdateAccessTokenRepository } from "../../protocols/database/dbRepositoriesProtocols";
+import { IHashComparer, IEncrypter } from "../../protocols/criptography/CriptographyProtocols";
+import { ILoadAccountByEmailRepository, IUpdateAccessTokenRepository } from "../../protocols/database/DbRepositoriesProtocols";
 
 export class DbAuthentication implements IAuthentication {
     constructor (
@@ -11,14 +11,14 @@ export class DbAuthentication implements IAuthentication {
     ) {}
 
     async auth(authentication: IAuthenticationModel): Promise<string | null> {
-        const account = await this.loadAccountByEmailRepository.load(authentication.email)
+        const account = await this.loadAccountByEmailRepository.loadAccountByEmail(authentication.email)
 
         if (account) {
             const isPasswordValid = await this.hashComparer.compare(authentication.password, account.password)
 
             if (isPasswordValid) {
                 const accessToken = await this.tokenGenerator.encrypt(account.id)
-                await this.updateAccesTokenRepository.update(account.id, accessToken)
+                await this.updateAccesTokenRepository.updateAccessToken(account.id, accessToken!)
 
                 return accessToken
             }

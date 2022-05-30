@@ -1,8 +1,8 @@
 import { ValidationComposite } from '../../../presentation/helpers/validators/ValidationComposite'
 import { makeSignInValidation } from './SignInValidation.factory'
 
-import { IValidation } from '../../../presentation/protocols/validation.interface'
-import { IEmailValidator } from '../../../presentation/protocols/emailValidator.interface'
+import { IValidation } from '../../../presentation/protocols/Validation.interface'
+import { IEmailValidator } from '../../../presentation/protocols/EmailValidator.interface'
 
 import { RequiredFieldsValidation } from '../../../presentation/helpers/validators/RequiredFields.validator'
 import { EmailValidation } from '../../../presentation/helpers/validators/EmailValidation.validator'
