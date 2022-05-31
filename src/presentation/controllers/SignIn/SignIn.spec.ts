@@ -53,6 +53,15 @@ const makeFakeRequest = (): IHttpRequest => ({
 })
 
 describe('Sign In Controller', () => {
+    test('Should call Authentication with correct values', async () => {
+        const { sut, authenticationStub } = makeSUT()
+        const authSpy = jest.spyOn(authenticationStub, 'auth')
+
+        await sut.handle(makeFakeRequest())
+
+        expect(authSpy).toBeCalledWith(makeFakeRequest().body)
+    })
+
     test('Should return 401 if authentication fails', async () => {
         const { sut, authenticationStub } = makeSUT()
         

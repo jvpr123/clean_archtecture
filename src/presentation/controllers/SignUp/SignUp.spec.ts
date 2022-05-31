@@ -1,17 +1,19 @@
 import { SignUpController } from "./SignUp";
 import { IAddAccount, IAddAccountModel } from "../../../domain/useCases/AddAccount.usecase"; 
+import { IAuthentication, IAuthenticationModel } from "../../../domain/useCases/Authentication.usecase";
 import { AccountModel } from "../../../domain/models/Account.model";
 
 import { IHttpRequest } from "../../protocols/http.interface";
 import { IValidation } from "../../protocols/validation.interface";
 
-import { badRequest, ok, serverError } from "../../helpers/http/httpHelper";
-import { MissingParamsError, ServerError } from '../../errors/index'
+import { badRequest, forbbiden, ok, serverError } from "../../helpers/http/httpHelper";
+import { EmailAlreadyInUseError, MissingParamsError, ServerError } from '../../errors/index'
 
 interface SutTypes {
   sut: SignUpController,
   addAccountStub: IAddAccount,
   validationStub: IValidation,
+  authenticationStub: IAuthentication,
 }
 
 const makeValidation = (): IValidation => {
@@ -41,18 +43,31 @@ const makeAddAccount = (): IAddAccount => {
   return new AddAccountStub()
 }
 
+const makeAuthentication = (): IAuthentication => {
+  class AuthenticationStub implements IAuthentication {
+      async auth(authentication: IAuthenticationModel): Promise<string> {
+          return 'access_token'
+      }
+  }
+
+  return new AuthenticationStub()
+}
+
 const makeSUT = (): SutTypes => {
   const addAccountStub = makeAddAccount()
   const validationStub = makeValidation()
+  const authenticationStub = makeAuthentication()
   const sut = new SignUpController(
     addAccountStub, 
     validationStub,
+    authenticationStub,
   )
 
   return {
     sut,
     addAccountStub,
     validationStub,
+    authenticationStub
   }
 }
 
@@ -91,30 +106,62 @@ describe("SignUp Controller", () => {
     expect(httpResponse).toEqual(serverError(new ServerError()));
   });
 
-  test("Should return 200 if valid data is provided", async () => {
-    const { sut } = makeSUT()
+  test("Should return 403 if AddAccount returns null", async () => {
+    const { sut, addAccountStub } = makeSUT()
+
+    jest.spyOn(addAccountStub, 'add').mockReturnValueOnce(new Promise(resolve => resolve(null)))
 
     const httpResponse = await sut.handle(makeFakeRequest());
 
-    expect(httpResponse).toEqual(ok(makeFakeAccount()));
+    expect(httpResponse).toEqual(forbbiden(new EmailAlreadyInUseError()));
   });
-  
+
   test("Should call Validation with correct values", async () => {
     const { sut, validationStub } = makeSUT()
     const validateSpy = jest.spyOn(validationStub, 'validate')
     const fakeRequest = makeFakeRequest()
-  
+    
     await sut.handle(fakeRequest);
-  
+    
     expect(validateSpy).toHaveBeenCalledWith(fakeRequest.body);
   });
-
+  
   test("Should return 400 if validation throws an error", async () => {
     const { sut, validationStub } = makeSUT()
-
+    
     jest.spyOn(validationStub, 'validate').mockReturnValueOnce(new MissingParamsError('any'))
     const httpResponse = await sut.handle(makeFakeRequest());
-
+    
     expect(httpResponse).toEqual(badRequest(new MissingParamsError('any')));
+  });
+  
+  test('Should call Authentication with correct values', async () => {
+    const { sut, authenticationStub } = makeSUT()
+    const authSpy = jest.spyOn(authenticationStub, 'auth')
+    
+    await sut.handle(makeFakeRequest())
+    
+    expect(authSpy).toBeCalledWith({
+      email: "any@email.com",
+      password: "any_password",
+    })
+  })
+  
+  test('Should return 500 if Authentication throws an error', async () => {
+    const { sut, authenticationStub } = makeSUT()
+    jest
+    .spyOn(authenticationStub, 'auth')
+    .mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    
+    const httpResponse = await sut.handle(makeFakeRequest())
+    
+    expect(httpResponse).toEqual(serverError(new Error()))
+  })
+
+  test("Should return 200 if valid data is provided", async () => {
+    const { sut } = makeSUT()
+    const httpResponse = await sut.handle(makeFakeRequest());
+  
+    expect(httpResponse).toEqual(ok({ accessToken: 'access_token' }));
   });
 });

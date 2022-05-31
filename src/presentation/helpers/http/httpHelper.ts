@@ -16,6 +16,13 @@ export const unauthorized = (): IHttpResponse => {
     }
 }
 
+export const forbbiden = (error: Error): IHttpResponse => {
+    return {
+        statusCode: 403,
+        body: error
+    }
+}
+
 export const serverError = (error: Error): IHttpResponse => {
     return {
         statusCode: 500,
