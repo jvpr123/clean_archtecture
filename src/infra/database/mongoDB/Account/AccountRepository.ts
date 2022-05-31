@@ -1,7 +1,7 @@
 import { IAddAccountModel } from "../../../../domain/useCases/AddAccount.usecase";
-import { IAddAccountRepository } from "../../../../data/protocols/database/AddAccountRepository.interface";
-import { ILoadAccountByEmailRepository } from "../../../../data/protocols/database/LoadAccountByEmailRepository.interface";
-import { IUpdateAccessTokenRepository } from "../../../../data/protocols/database/UpdateAccessTokenRepository.interface";
+import { IAddAccountRepository } from "../../../../data/protocols/database/addAccountRepository.interface";
+import { ILoadAccountByEmailRepository } from "../../../../data/protocols/database/loadAccountByEmailRepository.interface";
+import { IUpdateAccessTokenRepository } from "../../../../data/protocols/database/updateAccessTokenRepository.interface";
 
 import { AccountModel } from "../../../../domain/models/Account.model";
 

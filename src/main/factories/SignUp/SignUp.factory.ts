@@ -1,4 +1,4 @@
-import { IController } from "../../../presentation/protocols/Controller.interface";
+import { IController } from "../../../presentation/protocols/controller.interface";
 import { SignUpController } from "../../../presentation/controllers/SignUp/SignUp";
 
 import { DbAddAccount } from "../../../data/useCases/addAccount/DbAddAccount";

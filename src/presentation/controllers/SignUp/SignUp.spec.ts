@@ -2,8 +2,8 @@ import { SignUpController } from "./SignUp";
 import { IAddAccount, IAddAccountModel } from "../../../domain/useCases/AddAccount.usecase"; 
 import { AccountModel } from "../../../domain/models/Account.model";
 
-import { IHttpRequest } from "../../protocols/Http.interface";
-import { IValidation } from "../../protocols/Validation.interface";
+import { IHttpRequest } from "../../protocols/http.interface";
+import { IValidation } from "../../protocols/validation.interface";
 
 import { badRequest, ok, serverError } from "../../helpers/http/httpHelper";
 import { MissingParamsError, ServerError } from '../../errors/index'

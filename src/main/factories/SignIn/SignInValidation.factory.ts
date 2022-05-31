@@ -1,5 +1,5 @@
 
-import { IValidation } from "../../../presentation/protocols/Validation.interface";
+import { IValidation } from "../../../presentation/protocols/validation.interface";
 import { ValidationComposite } from "../../../presentation/helpers/validators/ValidationComposite";
 
 import { RequiredFieldsValidation } from "../../../presentation/helpers/validators/RequiredFields.validator";

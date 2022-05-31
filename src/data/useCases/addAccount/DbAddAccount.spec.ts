@@ -1,8 +1,8 @@
 import { DbAddAccount } from "./DbAddAccount"
-import { IHasher } from '../../protocols/criptography/Hasher.interface'
+import { IHasher } from '../../protocols/criptography/hasher.interface'
 import { IAddAccountModel } from "../../../domain/useCases/AddAccount.usecase"
 import { AccountModel } from "../../../domain/models/Account.model"
-import { IAddAccountRepository } from "../../protocols/database/AddAccountRepository.interface"
+import { IAddAccountRepository } from "../../protocols/database/addAccountRepository.interface"
 
 interface SutTypes {
     sut: DbAddAccount,

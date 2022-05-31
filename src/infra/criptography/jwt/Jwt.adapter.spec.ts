@@ -1,6 +1,6 @@
 import { sign } from 'crypto'
 import jwt from 'jsonwebtoken'
-import { IEncrypter } from '../../../data/protocols/criptography/Encrypter.interface'
+import { IEncrypter } from '../../../data/protocols/criptography/encrypter.interface'
 
 import { JwtAdapter } from './Jwt.adapter'
 

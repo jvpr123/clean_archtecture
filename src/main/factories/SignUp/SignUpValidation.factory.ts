@@ -1,4 +1,4 @@
-import { IValidation } from "../../../presentation/protocols/Validation.interface";
+import { IValidation } from "../../../presentation/protocols/validation.interface";
 import { ValidationComposite } from "../../../presentation/helpers/validators/ValidationComposite";
 
 import { CompareFieldsValidation } from "../../../presentation/helpers/validators/CompareFields.validator";

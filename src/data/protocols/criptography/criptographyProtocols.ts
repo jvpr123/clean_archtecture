@@ -1,3 +1,3 @@
-export * from './Hasher.interface'
-export * from './HashComparer.interface'
-export * from './Encrypter.interface'
+export * from './hasher.interface'
+export * from './hashComparer.interface'
+export * from './encrypter.interface'

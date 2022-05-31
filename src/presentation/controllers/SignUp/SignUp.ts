@@ -1,9 +1,9 @@
-import { IHttpRequest, IHttpResponse } from '../../protocols/Http.interface'
-import { IController } from '../../protocols/Controller.interface'
+import { IHttpRequest, IHttpResponse } from '../../protocols/http.interface'
+import { IController } from '../../protocols/controller.interface'
 
 import { badRequest, serverError, ok } from '../../helpers/http/httpHelper'
 import { IAddAccount } from '../../../domain/useCases/AddAccount.usecase';
-import { IValidation } from '../../protocols/Validation.interface';
+import { IValidation } from '../../protocols/validation.interface';
 
 export class SignUpController implements IController {
   constructor(
