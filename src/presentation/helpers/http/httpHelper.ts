@@ -2,6 +2,20 @@ import { ServerError } from '../../errors/ServerError.error'
 import { Unauthorized } from '../../errors/Unauthorized.error'
 import { IHttpResponse } from '../../protocols/http.interface'
 
+export const ok = (data: any): IHttpResponse => {
+    return {
+        statusCode: 200,
+        body: data,
+    }
+}
+
+export const noContent = (): IHttpResponse => {
+    return {
+        statusCode: 204,
+        body: null,
+    }
+}
+
 export const badRequest = (error: Error): IHttpResponse => {
     return {
         statusCode: 400,
@@ -29,11 +43,3 @@ export const serverError = (error: Error): IHttpResponse => {
         body: new ServerError(error.stack)
     }
 }
-
-export const ok = (data: any): IHttpResponse => {
-    return {
-        statusCode: 200,
-        body: data,
-    }
-}
-

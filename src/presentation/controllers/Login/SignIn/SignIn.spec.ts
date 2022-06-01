@@ -1,11 +1,11 @@
 import { SignInController } from "./SignIn"
 
-import { IHttpRequest } from "../../protocols/http.interface"
-import { IAuthentication, IAuthenticationModel } from "../../../domain/useCases/Authentication.usecase"
+import { IHttpRequest } from "../../../protocols/http.interface"
+import { IAuthentication, IAuthenticationModel } from "../../../../domain/useCases/Authentication.usecase"
 
-import { IValidation } from "../../protocols/validation.interface"
-import { badRequest, ok, unauthorized } from "../../helpers/http/httpHelper"
-import { MissingParamsError } from "../../errors"
+import { IValidation } from "../../../protocols/validation.interface"
+import { badRequest, ok, unauthorized } from "../../../helpers/http/httpHelper"
+import { MissingParamsError } from "../../../errors"
 
 interface SutTypes {
     sut: SignInController

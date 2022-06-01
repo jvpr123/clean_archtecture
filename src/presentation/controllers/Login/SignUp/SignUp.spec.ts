@@ -1,13 +1,13 @@
 import { SignUpController } from "./SignUp";
-import { IAddAccount, IAddAccountModel } from "../../../domain/useCases/AddAccount.usecase"; 
-import { IAuthentication, IAuthenticationModel } from "../../../domain/useCases/Authentication.usecase";
-import { AccountModel } from "../../../domain/models/Account.model";
+import { IAddAccount, IAddAccountModel } from "../../../../domain/useCases/AddAccount.usecase"; 
+import { IAuthentication, IAuthenticationModel } from "../../../../domain/useCases/Authentication.usecase";
+import { AccountModel } from "../../../../domain/models/Account.model";
 
-import { IHttpRequest } from "../../protocols/http.interface";
-import { IValidation } from "../../protocols/validation.interface";
+import { IHttpRequest } from "../../../protocols/http.interface";
+import { IValidation } from "../../../protocols/validation.interface";
 
-import { badRequest, forbbiden, ok, serverError } from "../../helpers/http/httpHelper";
-import { EmailAlreadyInUseError, MissingParamsError, ServerError } from '../../errors/index'
+import { badRequest, forbbiden, ok, serverError } from "../../../helpers/http/httpHelper";
+import { EmailAlreadyInUseError, MissingParamsError, ServerError } from '../../../errors/index'
 
 interface SutTypes {
   sut: SignUpController,
