@@ -1,5 +1,5 @@
 import { IController } from "../../../presentation/protocols/controller.interface";
-import { SignUpController } from "../../../presentation/controllers/SignUp/SignUp";
+import { SignUpController } from "../../../presentation/controllers/Login/SignUp/SignUp";
 
 import { DbAddAccount } from "../../../data/useCases/addAccount/DbAddAccount";
 import { DbAuthentication } from "../../../data/useCases/authentication/DbAuthentication";

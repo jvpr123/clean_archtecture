@@ -7,7 +7,7 @@ export const expressRouteAdapter = (controller: IController) => {
         const httpRequest: IHttpRequest = { body: req.body }
         const httpResponse: IHttpResponse = await controller.handle(httpRequest)
 
-        return httpResponse.statusCode === 200 
+        return httpResponse.statusCode >= 200 || httpResponse.statusCode <= 299
             ? res.status(httpResponse.statusCode).json(httpResponse.body)
             : res.status(httpResponse.statusCode).json({ error: httpResponse.body.message })
     }
