@@ -27,34 +27,38 @@ const makeSUT = (): sutTypes => {
 };
 
 describe("Bcrypt Adapter", () => {
-  test("Should call hash with correct values", async () => {
-    const { sut, salt } = makeSUT();
-    const hashSpy = jest.spyOn(bcrypt, "hash");
-    await sut.hash("valid_password");
-
-    expect(hashSpy).toHaveBeenCalledWith("valid_password", salt);
-  });
-
-  test("Should return hashed password on success", async () => {
-    const { sut } = makeSUT();
-    const hashedPassword = await sut.hash("valid_password");
-
-    expect(hashedPassword).toBe("hashed_password");
-  });
+  describe('hash()', () => {
+    test("Should call hash with correct values", async () => {
+      const { sut, salt } = makeSUT();
+      const hashSpy = jest.spyOn(bcrypt, "hash");
+      await sut.hash("valid_password");
   
-  test("Should call compare with correct values", async () => {
-    const { sut } = makeSUT();
-    const compareSpy = jest.spyOn(bcrypt, "compare");
+      expect(hashSpy).toHaveBeenCalledWith("valid_password", salt);
+    });
+  
+    test("Should return hashed password on success", async () => {
+      const { sut } = makeSUT();
+      const hashedPassword = await sut.hash("valid_password");
+  
+      expect(hashedPassword).toBe("hashed_password");
+    });
+  })
 
-    await sut.compare("valid_password", "hashed_password");
-
-    expect(compareSpy).toHaveBeenCalledWith("valid_password", "hashed_password");
-  });
-
-  test("Should return true if compare succeeds", async () => {
-    const { sut } = makeSUT();
-    const isValidPassword = await sut.compare("valid_password", "hashed_password");
-
-    expect(isValidPassword).toBe(true);
-  });
+  describe('compare()', () => {
+    test("Should call compare with correct values", async () => {
+      const { sut } = makeSUT();
+      const compareSpy = jest.spyOn(bcrypt, "compare");
+  
+      await sut.compare("valid_password", "hashed_password");
+  
+      expect(compareSpy).toHaveBeenCalledWith("valid_password", "hashed_password");
+    });
+  
+    test("Should return true if compare succeeds", async () => {
+      const { sut } = makeSUT();
+      const isValidPassword = await sut.compare("valid_password", "hashed_password");
+  
+      expect(isValidPassword).toBe(true);
+    });
+  })
 });

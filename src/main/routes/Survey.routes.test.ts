@@ -1,26 +1,61 @@
 import app from '../config/app'
+import env from '../config/env'
 import request from "supertest"
 
 import { MongoHelper } from "../../infra/database/mongoDB/helpers/MongoHelper"
+import { IAddAccountModel } from '../../domain/useCases/AddAccount.usecase'
 import { Collection } from "mongodb"
-import { hash } from "bcrypt"
+import { sign } from 'jsonwebtoken'
 
-let collection: Collection
+const makeFakeData = (): IAddAccountModel => ({
+    name: 'any_name',
+    email: 'any@email.com',
+    password: 'any_password',
+})
+
+let surveyCollection: Collection
+let accountCollection: Collection
+
 
 describe('Survey Routes', () => {
     beforeAll(async () => await MongoHelper.connect(`${process.env.MONGO_URL}`))
 
     beforeEach(async () => {
-        collection = MongoHelper.getCollection('surveys')
-        await collection.deleteMany({})
+        surveyCollection = MongoHelper.getCollection('surveys')
+        accountCollection = MongoHelper.getCollection('accounts')
+
+        await surveyCollection.deleteMany({})
+        await accountCollection.deleteMany({})
     })
 
     afterAll(async () => await MongoHelper.disconnect())
 
     describe('POST /surveys', () => {
-        test('Should return 204 on add survey success', async () => {
+        test('Should return 403 on add survey without access-token', async () => {
             await request(app)
                 .post('/api/surveys')
+                .send({
+                    question: 'any_question',
+                    answers: [
+                        { image: 'image_url_1', answer: 'answer_1' },
+                        { image: 'image_url_2', answer: 'answer_2' },
+                    ],
+                })
+                .expect(403)
+        })
+
+        test('Should return 204 on add survey with valid access-token', async () => {
+            const account = await accountCollection.insertOne({ ...makeFakeData(), role: 'admin' })
+            const accessToken = sign({ id: account.insertedId }, env.jwtSecret)
+
+            await accountCollection.updateOne(
+                { _id: account.insertedId },
+                { $set: { accessToken } }
+            )
+
+            await request(app)
+                .post('/api/surveys')
+                .set('x-access-token', accessToken)
                 .send({
                     question: 'any_question',
                     answers: [
