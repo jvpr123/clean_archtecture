@@ -1,3 +1,4 @@
+import MockDate from 'mockdate'
 import { Collection } from 'mongodb'
 import { IAddSurveyModel } from '../../../../domain/useCases/AddSurvey.usecase'
 import { MongoHelper } from '../helpers/MongoHelper'
@@ -12,19 +13,26 @@ const makeFakeData = (): IAddSurveyModel => ({
     answers: [
         { image: 'any_image', answer: 'any_answer' }
     ],
+    date: new Date()
 })
 
 let collection: Collection
 
 describe('Survey MongoDB Repository', () => {
-    beforeAll(async () => await MongoHelper.connect(`${process.env.MONGO_URL}`))
+    beforeAll(async () => {
+        await MongoHelper.connect(`${process.env.MONGO_URL}`)
+        MockDate.set(new Date())
+    })
 
     beforeEach(async () => {
         collection = MongoHelper.getCollection('surveys')
         await collection.deleteMany({})
     })
 
-    afterAll(async () => await MongoHelper.disconnect())
+    afterAll(async () => {
+        await MongoHelper.disconnect()
+        MockDate.reset()
+    })
 
     test('Should return an account on add success', async () => {
         const sut = makeSUT()

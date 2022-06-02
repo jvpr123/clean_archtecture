@@ -15,6 +15,7 @@
     "test:unit": "yarn test -c jest-unit-config.ts",
     "test:integration": "yarn test -c jest-integration-config.ts",
     "test:ci": "yarn test --coverage",
+    "test:coveralls": "yarn test:ci && coveralls < coverage/lcov.info",
     "test:staged": "yarn test --findRelatedTests"
   },
   "devDependencies": {
@@ -28,6 +29,7 @@
     "@types/supertest": "^2.0.12",
     "@types/validator": "^13.7.2",
     "@typescript-eslint/eslint-plugin": "2",
+    "coveralls": "^3.1.1",
     "eslint": "7",
     "eslint-config-standard-with-typescript": "^21.0.1",
     "eslint-plugin-import": "2",
@@ -38,6 +40,7 @@
     "husky": "^8.0.1",
     "jest": "^28.1.0",
     "lint-staged": "^12.4.1",
+    "mockdate": "^3.0.5",
     "rimraf": "^3.0.2",
     "supertest": "^6.2.3",
     "ts-jest": "^28.0.2",

@@ -2,6 +2,7 @@ import app from '../config/app'
 import env from '../config/env'
 import request from "supertest"
 
+import MockDate from 'mockdate'
 import { MongoHelper } from "../../infra/database/mongoDB/helpers/MongoHelper"
 import { IAddAccountModel } from '../../domain/useCases/AddAccount.usecase'
 import { Collection } from "mongodb"
@@ -18,7 +19,10 @@ let accountCollection: Collection
 
 
 describe('Survey Routes', () => {
-    beforeAll(async () => await MongoHelper.connect(`${process.env.MONGO_URL}`))
+    beforeAll(async () => {
+        await MongoHelper.connect(`${process.env.MONGO_URL}`)
+        MockDate.set(new Date())
+    })
 
     beforeEach(async () => {
         surveyCollection = MongoHelper.getCollection('surveys')
@@ -28,7 +32,10 @@ describe('Survey Routes', () => {
         await accountCollection.deleteMany({})
     })
 
-    afterAll(async () => await MongoHelper.disconnect())
+    afterAll(async () => {
+        await MongoHelper.disconnect()
+        MockDate.reset()
+    })
 
     describe('POST /surveys', () => {
         test('Should return 403 on add survey without access-token', async () => {
@@ -40,6 +47,7 @@ describe('Survey Routes', () => {
                         { image: 'image_url_1', answer: 'answer_1' },
                         { image: 'image_url_2', answer: 'answer_2' },
                     ],
+                    date: new Date(),
                 })
                 .expect(403)
         })
@@ -62,6 +70,7 @@ describe('Survey Routes', () => {
                         { image: 'image_url_1', answer: 'answer_1' },
                         { image: 'image_url_2', answer: 'answer_2' },
                     ],
+                    date: new Date(),
                 })
                 .expect(204)
         })
