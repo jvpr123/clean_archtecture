@@ -1,4 +1,3 @@
-import MockDate from 'mockdate'
 import { IHttpRequest } from '../../../protocols/http.interface'
 import { IValidation } from '../../../protocols/validation.interface'
 
@@ -16,7 +15,6 @@ const makeFakeRequest = (): IHttpRequest => ({
                 answer: 'any_answer',
             },
         ],
-        date: new Date(),
     }
 })
 
@@ -59,10 +57,6 @@ const makeSUT = (): SutTypes => {
 }
 
 describe('AddSurvey Controller', () => {
-    beforeAll(() => MockDate.set(new Date()))
-
-    afterAll(() => MockDate.reset())
-
     test('Should call validation with correct values', async () => {
         const { sut, validationStub } = makeSUT()
         const validateSpy = jest.spyOn(validationStub, 'validate')
