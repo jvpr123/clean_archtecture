@@ -1,5 +1,5 @@
-import { IAddSurveyModel } from '../../../domain/useCases/AddSurvey.usecase'
-import { IAddSurveyRepository } from '../../protocols/database/addSurveyRepository.interface'
+import { IAddSurveyModel } from 'src/domain/useCases/AddSurvey.usecase'
+import { IAddSurveyRepository } from 'src/data/protocols/database/addSurveyRepository.interface'
 
 import { DbAddSurvey } from './DbAddSurvey'
 
@@ -20,7 +20,7 @@ const makeAddSurveyRepository = (): IAddSurveyRepository => {
     return new AddSurveyRepositoryStub()
 }
 
-interface SutTypes {
+type SutTypes = {
     sut: DbAddSurvey
     addSurveyRepositoryStub: IAddSurveyRepository
 }

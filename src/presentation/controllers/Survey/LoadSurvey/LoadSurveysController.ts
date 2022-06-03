@@ -1,7 +1,8 @@
-import { ILoadSurveys } from "../../../../domain/useCases/LoadSurveys.usecase";
-import { noContent, ok, serverError } from "../../../helpers/http/httpHelper";
-import { IController } from "../../../protocols/controller.interface";
-import { IHttpRequest, IHttpResponse } from "../../../protocols/http.interface";
+import { IController } from "src/presentation/protocols/controller.interface";
+import { IHttpRequest, IHttpResponse } from "src/presentation/protocols/http.interface";
+import { ILoadSurveys } from "src/domain/useCases/LoadSurveys.usecase";
+
+import { noContent, ok, serverError } from "src/presentation/helpers/http/httpHelper";
 
 export class LoadSurveysController implements IController {
     constructor (

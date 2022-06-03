@@ -1,5 +1,5 @@
-import { IAddSurvey, IAddSurveyModel } from "../../../domain/useCases/AddSurvey.usecase";
-import { IAddSurveyRepository } from "../../protocols/database/addSurveyRepository.interface";
+import { IAddSurvey, IAddSurveyModel } from "src/domain/useCases/AddSurvey.usecase";
+import { IAddSurveyRepository } from "src/data/protocols/database/addSurveyRepository.interface";
 
 export class DbAddSurvey implements IAddSurvey {
     constructor (

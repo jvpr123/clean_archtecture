@@ -1,11 +1,11 @@
-import { IController } from "../../../presentation/protocols/controller.interface";
-import { LoadSurveysController } from "../../../presentation/controllers/Survey/LoadSurvey/LoadSurveysController";
+import { IController } from "src/presentation/protocols/controller.interface";
+import { LoadSurveysController } from "src/presentation/controllers/Survey/LoadSurvey/LoadSurveysController";
 
-import { LoggerRepository } from "../../../infra/database/mongoDB/Logger/LoggerRepository"
-import { SurveyMongoRepository } from '../../../infra/database/mongoDB/Survey/SurveyRepository'
+import { LoggerRepository } from "src/infra/database/mongoDB/Logger/LoggerRepository"
+import { SurveyMongoRepository } from 'src/infra/database/mongoDB/Survey/SurveyRepository'
 
-import { ControllerWithLoggerDecorator } from "../../decorators/Logger.decorator";
-import { DbLoadSurveys } from "../../../data/useCases/loadSurveys/DbLoadSurveys";
+import { ControllerWithLoggerDecorator } from "src/main/decorators/Logger.decorator";
+import { DbLoadSurveys } from "src/data/useCases/loadSurveys/DbLoadSurveys";
 
 export const makeLoadSurveysController = (): IController => {
     const loadSurveysRepository = new SurveyMongoRepository()

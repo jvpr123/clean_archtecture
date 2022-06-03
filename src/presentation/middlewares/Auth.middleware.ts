@@ -3,7 +3,7 @@ import { IMiddleware } from "../protocols/middleware.interface";
 
 import { forbbiden, ok, serverError } from "../helpers/http/httpHelper";
 import { AccessDeniedError } from "../errors";
-import { ILoadAccountByToken } from "../../domain/useCases/LoadAccountByToken.usecase";
+import { ILoadAccountByToken } from "src/domain/useCases/LoadAccountByToken.usecase";
 
 export class AuthenticationMiddleware implements IMiddleware {
     constructor (

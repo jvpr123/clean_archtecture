@@ -1,8 +1,8 @@
-import { AccountModel } from '../../../domain/models/Account.model'
+import { AccountModel } from 'src/domain/models/Account.model'
 import { DbLoadAccountByToken } from './DbLoadAccountByToken'
 
-import { IDecrypter } from '../../protocols/criptography/criptographyProtocols'
-import { ILoadAccountByTokenRepository } from '../../protocols/database/dbRepositoriesProtocols'
+import { IDecrypter } from 'src/data/protocols/criptography/criptographyProtocols'
+import { ILoadAccountByTokenRepository } from 'src/data/protocols/database/dbRepositoriesProtocols'
 
 const makeFakeAccount = (): AccountModel => ({
     id: 'valid_id',
@@ -31,7 +31,7 @@ const makeLoadAccountByTokenRepository = (): ILoadAccountByTokenRepository => {
     return new LoadAccountByTokenRepositoryStub()
 }
 
-interface SutTypes {
+type SutTypes = {
     sut: DbLoadAccountByToken,
     decrypterStub: IDecrypter,
     loadAccountByTokenRepositoryStub: ILoadAccountByTokenRepository,

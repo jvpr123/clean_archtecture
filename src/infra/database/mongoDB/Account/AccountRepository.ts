@@ -1,13 +1,13 @@
-import { IAddAccountModel } from "../../../../domain/useCases/AddAccount.usecase";
-import { IAddAccountRepository } from "../../../../data/protocols/database/addAccountRepository.interface";
-import { ILoadAccountByEmailRepository } from "../../../../data/protocols/database/loadAccountByEmailRepository.interface";
-import { IUpdateAccessTokenRepository } from "../../../../data/protocols/database/updateAccessTokenRepository.interface";
+import { IAddAccountModel } from "src/domain/useCases/AddAccount.usecase";
+import { IAddAccountRepository } from "src/data/protocols/database/addAccountRepository.interface";
+import { ILoadAccountByEmailRepository } from "src/data/protocols/database/loadAccountByEmailRepository.interface";
+import { IUpdateAccessTokenRepository } from "src/data/protocols/database/updateAccessTokenRepository.interface";
+import { ILoadAccountByTokenRepository } from "src/data/protocols/database/loadAccountByTokenRepository.interface";
 
-import { AccountModel } from "../../../../domain/models/Account.model";
+import { AccountModel } from "src/domain/models/Account.model";
 
 import { map } from "../helpers/CollectionMapper";
 import { MongoHelper } from "../helpers/MongoHelper";
-import { ILoadAccountByTokenRepository } from "../../../../data/protocols/database/loadAccountByTokenRepository.interface";
 
 export class AccountMongoRepository implements 
     IAddAccountRepository, 

@@ -1,7 +1,7 @@
 import { IEmailValidator } from "../protocols/emailValidator.interface"
 import { EmailValidation } from "./EmailValidation.validator"
 
-interface SutTypes {
+type SutTypes = {
   sut: EmailValidation,
   emailValidatorStub: IEmailValidator,
 }

@@ -1,7 +1,7 @@
 import { LoadSurveysController } from './LoadSurveysController'
-import { SurveyModel } from '../../../../domain/models/Survey.model'
-import { ILoadSurveys } from '../../../../domain/useCases/LoadSurveys.usecase'
-import { noContent, ok, serverError } from '../../../helpers/http/httpHelper'
+import { SurveyModel } from 'src/domain/models/Survey.model'
+import { ILoadSurveys } from 'src/domain/useCases/LoadSurveys.usecase'
+import { noContent, ok, serverError } from 'src/presentation/helpers/http/httpHelper'
 
 const makeFakeSurveys = (): SurveyModel[] => ([
     {
@@ -21,7 +21,7 @@ const makeLoadSurveys = (): ILoadSurveys => {
     return new LoadSurveysStub()
 }
 
-interface SutTypes {
+type SutTypes = {
     sut: LoadSurveysController,
     loadSurveysStub: ILoadSurveys,
 }

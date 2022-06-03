@@ -1,4 +1,4 @@
-import { IValidation } from "../../presentation/protocols/validation.interface";
+import { IValidation } from "src/presentation/protocols/validation.interface";
 
 export class ValidationComposite implements IValidation {
     constructor (private validations: IValidation[]) {}

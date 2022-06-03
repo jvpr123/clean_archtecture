@@ -1,17 +1,17 @@
-import { IController } from "../../../presentation/protocols/controller.interface";
-import { SignUpController } from "../../../presentation/controllers/Login/SignUp/SignUp";
+import { IController } from "src/presentation/protocols/controller.interface";
+import { SignUpController } from "src/presentation/controllers/Login/SignUp/SignUp";
 
-import { DbAddAccount } from "../../../data/useCases/addAccount/DbAddAccount";
-import { DbAuthentication } from "../../../data/useCases/authentication/DbAuthentication";
+import { DbAddAccount } from "src/data/useCases/addAccount/DbAddAccount";
+import { DbAuthentication } from "src/data/useCases/authentication/DbAuthentication";
 
-import { AccountMongoRepository } from "../../../infra/database/mongoDB/Account/AccountRepository";
-import { LoggerRepository } from "../../../infra/database/mongoDB/Logger/LoggerRepository";
-import { BcryptAdapter } from "../../../infra/criptography/bcrypt/Bcrypt.adapter";
-import { JwtAdapter } from "../../../infra/criptography/jwt/Jwt.adapter";
+import { AccountMongoRepository } from "src/infra/database/mongoDB/Account/AccountRepository";
+import { LoggerRepository } from "src/infra/database/mongoDB/Logger/LoggerRepository";
+import { BcryptAdapter } from "src/infra/criptography/bcrypt/Bcrypt.adapter";
+import { JwtAdapter } from "src/infra/criptography/jwt/Jwt.adapter";
 
-import { ControllerWithLoggerDecorator } from "../../decorators/Logger.decorator";
+import { ControllerWithLoggerDecorator } from "src/main/decorators/Logger.decorator";
 import { makeSignUpValidation } from "./SignUpValidation.factory";
-import env from "../../config/env";
+import env from "src/main/config/env";
 
 export const makeSignUpController = (): IController => {
     const validations = makeSignUpValidation()

@@ -1,15 +1,15 @@
 import { SignUpController } from "./SignUp";
-import { IAddAccount, IAddAccountModel } from "../../../../domain/useCases/AddAccount.usecase"; 
-import { IAuthentication, IAuthenticationModel } from "../../../../domain/useCases/Authentication.usecase";
-import { AccountModel } from "../../../../domain/models/Account.model";
+import { IAddAccount, IAddAccountModel } from "src/domain/useCases/AddAccount.usecase"; 
+import { IAuthentication, IAuthenticationModel } from "src/domain/useCases/Authentication.usecase";
+import { AccountModel } from "src/domain/models/Account.model";
 
-import { IHttpRequest } from "../../../protocols/http.interface";
-import { IValidation } from "../../../protocols/validation.interface";
+import { IHttpRequest } from "src/presentation/protocols/http.interface";
+import { IValidation } from "src/presentation/protocols/validation.interface";
 
-import { badRequest, forbbiden, ok, serverError } from "../../../helpers/http/httpHelper";
-import { EmailAlreadyInUseError, MissingParamsError, ServerError } from '../../../errors/index'
+import { badRequest, forbbiden, ok, serverError } from "src/presentation/helpers/http/httpHelper";
+import { EmailAlreadyInUseError, MissingParamsError, ServerError } from 'src/presentation/errors/index'
 
-interface SutTypes {
+type SutTypes = {
   sut: SignUpController,
   addAccountStub: IAddAccount,
   validationStub: IValidation,

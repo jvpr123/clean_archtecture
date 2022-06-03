@@ -1,9 +1,9 @@
 import { AuthenticationMiddleware } from '../middlewares/Auth.middleware'
-import { ILoadAccountByToken } from '../../domain/useCases/LoadAccountByToken.usecase'
+import { ILoadAccountByToken } from 'src/domain/useCases/LoadAccountByToken.usecase'
 
 import { forbbiden, ok, serverError } from '../helpers/http/httpHelper'
 import { AccessDeniedError, ServerError } from '../errors'
-import { AccountModel } from '../../domain/models/Account.model'
+import { AccountModel } from 'src/domain/models/Account.model'
 import { IHttpRequest } from '../protocols/http.interface'
 
 const makeFakeAccount = (): AccountModel => ({
@@ -27,7 +27,7 @@ const makeLoadAccountByTokenStub = (): ILoadAccountByToken => {
     return new LoadAccountByTokenStub()
 }
 
-interface SutTypes {
+type SutTypes = {
     sut: AuthenticationMiddleware
     loadAccountByTokenStub: ILoadAccountByToken
 }

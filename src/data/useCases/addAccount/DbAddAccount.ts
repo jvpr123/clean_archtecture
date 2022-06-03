@@ -1,9 +1,9 @@
-import { AccountModel } from '../../../domain/models/Account.model';
-import { IAddAccount, IAddAccountModel } from '../../../domain/useCases/AddAccount.usecase'
-import { IAddAccountRepository } from '../../protocols/database/addAccountRepository.interface';
-import { IHasher } from '../../protocols/criptography/hasher.interface';
-import { ILoadAccountByEmailRepository } from '../../protocols/database/loadAccountByEmailRepository.interface';
-import { EmailAlreadyInUseError } from '../../../presentation/errors';
+import { AccountModel } from 'src/domain/models/Account.model';
+import { IAddAccount, IAddAccountModel } from 'src/domain/useCases/AddAccount.usecase'
+import { IAddAccountRepository } from 'src/data/protocols/database/addAccountRepository.interface';
+import { IHasher } from 'src/data/protocols/criptography/hasher.interface';
+import { ILoadAccountByEmailRepository } from 'src/data/protocols/database/loadAccountByEmailRepository.interface';
+import { EmailAlreadyInUseError } from 'src/presentation/errors';
 
 export class DbAddAccount implements IAddAccount {
     constructor (

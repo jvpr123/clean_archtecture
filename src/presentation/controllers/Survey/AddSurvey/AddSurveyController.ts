@@ -1,8 +1,9 @@
-import { IAddSurvey } from "../../../../domain/useCases/AddSurvey.usecase";
-import { badRequest, noContent, serverError } from "../../../helpers/http/httpHelper";
-import { IController } from "../../../protocols/controller.interface";
-import { IHttpRequest, IHttpResponse } from "../../../protocols/http.interface";
-import { IValidation } from "../../../protocols/validation.interface";
+import { IController } from "src/presentation/protocols/controller.interface";
+import { IHttpRequest, IHttpResponse } from "src/presentation/protocols/http.interface";
+import { IValidation } from "src/presentation/protocols/validation.interface";
+import { IAddSurvey } from "src/domain/useCases/AddSurvey.usecase";
+
+import { badRequest, noContent, serverError } from "src/presentation/helpers/http/httpHelper";
 
 export class AddSurveyController implements IController {
     constructor (

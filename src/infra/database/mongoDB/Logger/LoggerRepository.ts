@@ -1,4 +1,4 @@
-import { ILoggerRepository } from "../../../../data/protocols/database/loggerRepository.interface";
+import { ILoggerRepository } from "src/data/protocols/database/loggerRepository.interface";
 import { MongoHelper } from "../helpers/MongoHelper";
 
 export class LoggerRepository implements ILoggerRepository {

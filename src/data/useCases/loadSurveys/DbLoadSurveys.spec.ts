@@ -1,5 +1,5 @@
-import { SurveyModel } from '../../../domain/models/Survey.model'
-import { ILoadSurveysRepository } from '../../protocols/database/loadSurveysRepository.interface'
+import { SurveyModel } from 'src/domain/models/Survey.model'
+import { ILoadSurveysRepository } from 'src/data/protocols/database/loadSurveysRepository.interface'
 import { DbLoadSurveys } from './DbLoadSurveys'
 
 const makeFakeSurveys = (): SurveyModel[] => ([
@@ -20,7 +20,7 @@ const makeLoadSurveysRepository = (): ILoadSurveysRepository => {
     return new LoadSurveysRepositoryStub()
 }
 
-interface SutTypes {
+type SutTypes = {
     sut: DbLoadSurveys,
     loadSurveysRepositoryStub: ILoadSurveysRepository,
 }

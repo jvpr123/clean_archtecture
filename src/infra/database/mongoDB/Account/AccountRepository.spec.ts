@@ -1,5 +1,5 @@
 import { Collection } from 'mongodb'
-import { IAddAccountModel } from '../../../../domain/useCases/AddAccount.usecase'
+import { IAddAccountModel } from 'src/domain/useCases/AddAccount.usecase'
 import { MongoHelper } from '../helpers/MongoHelper'
 import { AccountMongoRepository } from './AccountRepository'
 

@@ -1,11 +1,11 @@
 import { DbAddAccount } from "./DbAddAccount"
-import { IHasher } from '../../protocols/criptography/hasher.interface'
-import { IAddAccountModel } from "../../../domain/useCases/AddAccount.usecase"
-import { AccountModel } from "../../../domain/models/Account.model"
-import { IAddAccountRepository } from "../../protocols/database/addAccountRepository.interface"
-import { ILoadAccountByEmailRepository } from "../../protocols/database/loadAccountByEmailRepository.interface"
+import { IHasher } from 'src/data/protocols/criptography/hasher.interface'
+import { IAddAccountModel } from "src/domain/useCases/AddAccount.usecase"
+import { AccountModel } from "src/domain/models/Account.model"
+import { IAddAccountRepository } from "src/data/protocols/database/addAccountRepository.interface"
+import { ILoadAccountByEmailRepository } from "src/data/protocols/database/loadAccountByEmailRepository.interface"
 
-interface SutTypes {
+type SutTypes = {
     sut: DbAddAccount,
     encrypterStub: IHasher,
     addAccountRepositoryStub: IAddAccountRepository,

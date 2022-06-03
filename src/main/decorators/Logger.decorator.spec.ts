@@ -1,10 +1,10 @@
-import { serverError } from "../../presentation/helpers/http/httpHelper"
-import { IController } from "../../presentation/protocols/controller.interface"
-import { IHttpRequest, IHttpResponse } from "../../presentation/protocols/http.interface"
-import { ILoggerRepository } from '../../data/protocols/database/loggerRepository.interface'
+import { serverError } from "src/presentation/helpers/http/httpHelper"
+import { IController } from "src/presentation/protocols/controller.interface"
+import { IHttpRequest, IHttpResponse } from "src/presentation/protocols/http.interface"
+import { ILoggerRepository } from 'src/data/protocols/database/loggerRepository.interface'
 import { ControllerWithLoggerDecorator } from "./Logger.decorator"
 
-interface SutTypes {
+type SutTypes = {
     sut: ControllerWithLoggerDecorator
     controllerStub: IController
     loggerRepositoryStub: ILoggerRepository

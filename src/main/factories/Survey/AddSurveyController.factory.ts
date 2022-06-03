@@ -1,10 +1,10 @@
-import { IController } from "../../../presentation/protocols/controller.interface";
-import { AddSurveyController } from "../../../presentation/controllers/Survey/AddSurvey/AddSurveyController";
+import { IController } from "src/presentation/protocols/controller.interface";
+import { AddSurveyController } from "src/presentation/controllers/Survey/AddSurvey/AddSurveyController";
 
-import { LoggerRepository } from "../../../infra/database/mongoDB/Logger/LoggerRepository"
-import { SurveyMongoRepository } from "../../../infra/database/mongoDB/Survey/SurveyRepository";
+import { LoggerRepository } from "src/infra/database/mongoDB/Logger/LoggerRepository"
+import { SurveyMongoRepository } from "src/infra/database/mongoDB/Survey/SurveyRepository";
 
-import { ControllerWithLoggerDecorator } from "../../decorators/Logger.decorator";
+import { ControllerWithLoggerDecorator } from "src/main/decorators/Logger.decorator";
 import { makeAddSurveyValidation } from "./AddSurveyValidation.factory";
 
 export const makeAddSurveyController = (): IController => {

@@ -1,12 +1,12 @@
-import { IHttpRequest, IHttpResponse } from '../../../protocols/http.interface'
-import { IController } from '../../../protocols/controller.interface'
-import { IValidation } from '../../../protocols/validation.interface';
+import { IHttpRequest, IHttpResponse } from 'src/presentation/protocols/http.interface'
+import { IController } from 'src/presentation/protocols/controller.interface'
+import { IValidation } from 'src/presentation/protocols/validation.interface';
 
-import { badRequest, serverError, ok, forbbiden } from '../../../helpers/http/httpHelper'
+import { badRequest, serverError, ok, forbbiden } from 'src/presentation/helpers/http/httpHelper'
+import { EmailAlreadyInUseError } from 'src/presentation/errors';
 
-import { IAddAccount } from '../../../../domain/useCases/AddAccount.usecase';
-import { IAuthentication } from '../../../../domain/useCases/Authentication.usecase';
-import { EmailAlreadyInUseError } from '../../../errors';
+import { IAddAccount } from 'src/domain/useCases/AddAccount.usecase';
+import { IAuthentication } from 'src/domain/useCases/Authentication.usecase';
 
 export class SignUpController implements IController {
   constructor(

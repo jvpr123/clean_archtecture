@@ -2,9 +2,9 @@ import app from '../config/app'
 import env from '../config/env'
 import request from "supertest"
 
-import { MongoHelper } from "../../infra/database/mongoDB/helpers/MongoHelper"
-import { IAddAccountModel } from '../../domain/useCases/AddAccount.usecase'
-import { IAddSurveyModel } from '../../domain/useCases/AddSurvey.usecase'
+import { MongoHelper } from "src/infra/database/mongoDB/helpers/MongoHelper"
+import { IAddAccountModel } from 'src/domain/useCases/AddAccount.usecase'
+import { IAddSurveyModel } from 'src/domain/useCases/AddSurvey.usecase'
 import { Collection } from "mongodb"
 import { sign } from 'jsonwebtoken'
 

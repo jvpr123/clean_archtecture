@@ -1,10 +1,10 @@
-import { IHttpRequest } from '../../../protocols/http.interface'
-import { IValidation } from '../../../protocols/validation.interface'
+import { IHttpRequest } from 'src/presentation/protocols/http.interface'
+import { IValidation } from 'src/presentation/protocols/validation.interface'
 
-import { badRequest, noContent, serverError } from '../../../helpers/http/httpHelper'
+import { badRequest, noContent, serverError } from 'src/presentation/helpers/http/httpHelper'
 
 import { AddSurveyController } from './AddSurveyController'
-import { IAddSurvey, IAddSurveyModel } from '../../../../domain/useCases/AddSurvey.usecase'
+import { IAddSurvey, IAddSurveyModel } from 'src/domain/useCases/AddSurvey.usecase'
 
 const makeFakeRequest = (): IHttpRequest => ({
     body: {
@@ -38,7 +38,7 @@ const makeAddSurvey = (): IAddSurvey => {
     return new AddSurveyStub()
 }
 
-interface SutTypes {
+type SutTypes = {
     sut: AddSurveyController,
     validationStub: IValidation,
     addSurveyStub: IAddSurvey,

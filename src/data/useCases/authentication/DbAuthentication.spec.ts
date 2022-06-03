@@ -1,11 +1,11 @@
-import { AccountModel } from "../../../domain/models/Account.model"
+import { AccountModel } from "src/domain/models/Account.model"
 import { DbAuthentication } from "./DbAuthentication"
 
-import { IAuthenticationModel } from "../../../domain/useCases/Authentication.usecase"
-import { IEncrypter, IHashComparer } from "../../protocols/criptography/criptographyProtocols"
-import { ILoadAccountByEmailRepository, IUpdateAccessTokenRepository } from "../../protocols/database/dbRepositoriesProtocols"
+import { IAuthenticationModel } from "src/domain/useCases/Authentication.usecase"
+import { IEncrypter, IHashComparer } from "src/data/protocols/criptography/criptographyProtocols"
+import { ILoadAccountByEmailRepository, IUpdateAccessTokenRepository } from "src/data/protocols/database/dbRepositoriesProtocols"
 
-interface SutTypes {
+type SutTypes = {
     sut: DbAuthentication,
     loadAccountByEmailRepositoryStub: ILoadAccountByEmailRepository,
     hashComparerStub: IHashComparer,
