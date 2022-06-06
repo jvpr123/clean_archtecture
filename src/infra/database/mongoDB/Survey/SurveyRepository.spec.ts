@@ -51,7 +51,7 @@ describe('Survey MongoDB Repository', () => {
         })
     })
 
-    describe('load()', () => {
+    describe('loadAll()', () => {
         test('Should load all surveys on success', async () => {
             const sut = makeSUT()
             await collection.insertMany(makeFakeSurveys())
@@ -65,6 +65,16 @@ describe('Survey MongoDB Repository', () => {
             const surveys = await sut.loadAllSurveys()
     
             expect(surveys.length).toBe(0)
+        })
+    })
+
+    describe('loadById()', () => {
+        test('Should load survey by id on success', async () => {
+            const sut = makeSUT()
+            const result = await collection.insertOne(makeFakeData())
+            const survey = await sut.loadById(result.insertedId.toString())
+    
+            expect(survey).toBeTruthy()
         })
     })
 })
