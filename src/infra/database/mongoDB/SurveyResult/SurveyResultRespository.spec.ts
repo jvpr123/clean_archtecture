@@ -97,9 +97,6 @@ describe('Survey Results MongoDB Repository', () => {
                 answer: 'updated_answer',
             })
 
-            console.log(previousSurveyResult)
-            console.log(surveyResult)
-
             expect(surveyResult).toBeTruthy()
             expect(surveyResult.id).toEqual(previousSurveyResult.id)
             expect(surveyResult.answer).toEqual('updated_answer')

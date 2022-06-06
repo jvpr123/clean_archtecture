@@ -4,7 +4,11 @@ import { IHttpRequest, IHttpResponse } from "src/presentation/protocols/http.int
 
 export const expressRouteAdapter = (controller: IController) => {
     return async (req: Request, res: Response) => {
-        const httpRequest: IHttpRequest = { body: req.body }
+        const httpRequest: IHttpRequest = { 
+            body: req.body,
+            params: req.params,
+            accountId: req.accountId,
+        }
         const httpResponse: IHttpResponse = await controller.handle(httpRequest)
 
         return httpResponse.statusCode >= 200 && httpResponse.statusCode <= 299
