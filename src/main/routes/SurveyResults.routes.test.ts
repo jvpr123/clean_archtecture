@@ -1,10 +1,11 @@
-import app from '../config/app'
-import env from '../config/env'
+import app from 'src/main/config/app'
+import env from 'src/main/config/env'
 import request from "supertest"
 
 import { MongoHelper } from "src/infra/database/mongoDB/helpers/MongoHelper"
 import { IAddAccountModel } from 'src/domain/useCases/AddAccount.usecase'
 import { IAddSurveyModel } from 'src/domain/useCases/AddSurvey.usecase'
+
 import { Collection } from "mongodb"
 import { sign } from 'jsonwebtoken'
 

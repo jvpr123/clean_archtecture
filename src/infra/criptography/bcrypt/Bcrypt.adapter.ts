@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 
 import { IHasher } from "src/data/protocols/criptography/hasher.interface";
 import { IHashComparer } from "src/data/protocols/criptography/hashComparer.interface";

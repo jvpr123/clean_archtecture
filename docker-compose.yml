@@ -23,4 +23,4 @@ services:
       - "9222:9222"
     links:
       - mongodb
-    command: npm run debug
+    command: npm run start
