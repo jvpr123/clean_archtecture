@@ -20,7 +20,6 @@ services:
       - ./package.json:/usr/src/clean-node-api/package.json
     ports:
       - "3030:3030"
-      - "9222:9222"
     links:
       - mongodb
     command: npm run start
